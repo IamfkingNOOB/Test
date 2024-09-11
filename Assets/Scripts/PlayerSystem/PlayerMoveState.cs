@@ -10,7 +10,7 @@ namespace PlayerSystem
 		#region 변수(필드)
 
 		// [컴포넌트] 애니메이터(Animator)
-		private readonly Animator _animator = default;
+		private readonly Animator _animator;
 
 		// [변수] 애니메이터 매개변수
 		private readonly int _isMoveAnimatorHash = Animator.StringToHash("isMove");
@@ -22,8 +22,7 @@ namespace PlayerSystem
 		// [생성자] 변수를 초기화합니다.
 		public PlayerMoveState(PlayerControllerBase controller) : base(controller)
 		{
-			bool isComponentFound = false;
-			isComponentFound = controller.TryGetComponent(out _animator);
+			bool isComponentFound = controller.TryGetComponent(out _animator);
 			
 			if (!isComponentFound)
 				Debug.LogError("[PlayerIdleState] 컴포넌트를 가져오는 데 실패했습니다!");

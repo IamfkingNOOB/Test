@@ -6,7 +6,7 @@ namespace PlayerSystem
 		#region 변수(필드)
 
 		// [Field] Player Controller
-		protected readonly PlayerControllerBase Controller = default;
+		protected readonly PlayerControllerBase Controller;
 	
 		#endregion 변수(필드)
 	

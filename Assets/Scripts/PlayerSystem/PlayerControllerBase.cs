@@ -13,12 +13,12 @@ namespace PlayerSystem
 		#region 변수(필드)
 		
 		// [변수] 플레이어(발키리)의 데이터
-		public ValkyrieBattleData BattleData { get; private set; } = default;
+		public ValkyrieBattleData BattleData { get; private set; }
 
 		// [변수] 상태 패턴에 사용하는 변수들
-		private Dictionary<Type, PlayerStateBase> _stateCache = default;
-		private IPlayerState _currentState = default;
-		private IPlayerInputReceiver _inputReceiver = default;
+		private Dictionary<Type, PlayerStateBase> _stateCache;
+		private IPlayerState _currentState;
+		private IPlayerInputReceiver _inputReceiver;
 
 		#endregion 변수(필드)
 
