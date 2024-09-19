@@ -3,7 +3,7 @@ using UnityEngine;
 
 internal class GameManager : MonoBehaviour
 {
-	public void RunCoroutine(IEnumerator coroutine)
+	internal void RunCoroutine(IEnumerator coroutine)
 	{
 		StartCoroutine(coroutine);
 	}

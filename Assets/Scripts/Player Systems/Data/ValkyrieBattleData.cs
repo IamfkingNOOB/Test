@@ -17,38 +17,38 @@ namespace PlayerSystem
 		
 		// [변수] 체력(HP)
 		private int _currentHealthPoint; // 현재 체력
-		public int CurrentHealthPoint
+		internal int CurrentHealthPoint
 		{
 			get => _currentHealthPoint;
 			private set => SetField(ref _currentHealthPoint, value, nameof(CurrentHealthPoint));
 		}
-		public int MaxHealthPoint { get; init; } // 최대 체력
+		internal int MaxHealthPoint { get; init; } // 최대 체력
 
 		// [변수] 기력(SP)
 		private int _currentSkillPoint; // 현재 기력
-		public int CurrentSkillPoint
+		internal int CurrentSkillPoint
 		{
 			get => _currentSkillPoint;
 			private set => SetField(ref _currentSkillPoint, value, nameof(CurrentSkillPoint));
 		}
-		public int MaxSkillPoint { get; init; } // 최대 기력
+		internal int MaxSkillPoint { get; init; } // 최대 기력
 
 		// [변수] 필살기(Ultimate)
-		public int UltimateCost { get; init; } // 기력 소모량
+		internal int UltimateCost { get; init; } // 기력 소모량
 		private float _currentUltimateCoolTime; // 남은 재사용 대기 시간
-		public float CurrentUltimateCoolTime
+		internal float CurrentUltimateCoolTime
 		{
 			get => _currentUltimateCoolTime;
 			private set => SetField(ref _currentUltimateCoolTime, value, nameof(CurrentUltimateCoolTime));
 		}
-		public int MaxUltimateCoolTime { get; init; } // 기본 재사용 대기 시간
+		internal int MaxUltimateCoolTime { get; init; } // 기본 재사용 대기 시간
 
 		#endregion 변수(필드)
 		
 		#region 함수(메서드)
 		
 		// [생성자] 컨트롤러의 참조를 받아 저장합니다.
-		public ValkyrieBattleData(PlayerControllerBase controller)
+		internal ValkyrieBattleData(PlayerControllerBase controller)
 		{
 			_controller = controller;
 		}
@@ -74,19 +74,19 @@ namespace PlayerSystem
 		}
 		
 		// [함수] 체력을 회복합니다. 최대 체력을 초과하여 회복할 수 없습니다.
-		public void HealHealthPoint(int heal) => CurrentHealthPoint = Mathf.Min(CurrentHealthPoint + heal, MaxHealthPoint); // 고정값
-		public void HealHealthPoint(float percentage) => HealHealthPoint(Mathf.FloorToInt(MaxHealthPoint * percentage)); // 비율값
+		internal void HealHealthPoint(int heal) => CurrentHealthPoint = Mathf.Min(CurrentHealthPoint + heal, MaxHealthPoint); // 고정값
+		internal void HealHealthPoint(float percentage) => HealHealthPoint(Mathf.FloorToInt(MaxHealthPoint * percentage)); // 비율값
 
 		// [함수] 체력을 잃습니다. 0 미만으로 잃을 수 없습니다.
-		public void DamageHealthPoint(int damage) => CurrentHealthPoint = Mathf.Max(CurrentHealthPoint - damage, 0); // 고정값
-		public void DamageHealthPoint(float percentage) => DamageHealthPoint(Mathf.FloorToInt(MaxHealthPoint * percentage)); // 회복값
+		internal void DamageHealthPoint(int damage) => CurrentHealthPoint = Mathf.Max(CurrentHealthPoint - damage, 0); // 고정값
+		internal void DamageHealthPoint(float percentage) => DamageHealthPoint(Mathf.FloorToInt(MaxHealthPoint * percentage)); // 회복값
 
 		// [함수] 기력을 회복합니다. 최대 기력을 초과하여 회복할 수 없습니다.
-		public void ChargeSkillPoint(int sp) => CurrentSkillPoint = Mathf.Min(CurrentSkillPoint + sp, MaxSkillPoint); // 고정값
-		public void ChargeSkillPoint(float percentage) => ChargeSkillPoint(Mathf.FloorToInt(MaxSkillPoint * percentage)); // 비율값
+		internal void ChargeSkillPoint(int sp) => CurrentSkillPoint = Mathf.Min(CurrentSkillPoint + sp, MaxSkillPoint); // 고정값
+		internal void ChargeSkillPoint(float percentage) => ChargeSkillPoint(Mathf.FloorToInt(MaxSkillPoint * percentage)); // 비율값
 
 		// [함수] 필살기를 발동합니다. 현재 기력이 소모량 이상이고, 재사용 대기 시간이 아니어야만 발동할 수 있습니다.
-		public bool UseUltimate()
+		internal bool UseUltimate()
 		{
 			bool usable = _currentSkillPoint >= UltimateCost && _currentUltimateCoolTime <= 0.0f;
 			

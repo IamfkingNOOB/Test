@@ -21,7 +21,7 @@ namespace PlayerSystem
 		#region 함수(메서드)
 
 		// [생성자] 변수를 초기화합니다.
-		public PlayerMoveState(PlayerControllerBase controller) : base(controller)
+		internal PlayerMoveState(PlayerControllerBase controller) : base(controller)
 		{
 			_playerCamera = Camera.main?.transform; // 카메라는 메인 카메라(MainCamera 레이어)를 기준으로 합니다.
 
@@ -37,21 +37,19 @@ namespace PlayerSystem
 		protected override void Enter()
 		{
 			PlayAnimation(); // 애니메이션을 재생합니다.
+			Debug.Log("Move 상태에 진입합니다!");
 		}
 
 		protected override void Execute()
 		{
 			base.Execute();
 
-			if (IsMove())
-				Move();
-			else
-				StopAnimation();
+			if (IsMove()) Move();
+			else StopAnimation();
 		}
 
 		protected override void Exit()
 		{
-			base.Exit();
 			StopAnimation(); // 애니메이션을 정지합니다.
 		}
 
@@ -71,8 +69,7 @@ namespace PlayerSystem
 
 		private bool IsMove()
 		{
-			Vector2 inputVector = Controller.InputVector; // 컨트롤러로부터 이동 벡터를 참조합니다.
-			return inputVector.sqrMagnitude != 0.0f;
+			return Controller.InputVector.sqrMagnitude != 0.0f; // 컨트롤러로부터 이동 벡터를 참조합니다.
 		}
 
 		// [함수] 이동을 구현합니다.

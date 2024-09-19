@@ -7,61 +7,11 @@ namespace PlayerSystem
 	/// </summary>
 	internal class PlayerIdleState : PlayerStateBase
 	{
-		#region 변수(필드)
+		// [생성자]
+		internal PlayerIdleState(PlayerControllerBase controller) : base(controller) { }
 
-		// [변수] 애니메이터(Animator)의 컴포넌트 및 매개변수
-		private readonly Animator _animator; // 애니메이터의 컴포넌트
-		private readonly int _isIdleAnimatorHash = Animator.StringToHash("isIdle"); // 애니메이터의 매개변수 해시 (Bool)
-
-		#endregion 변수(필드)
-
-		#region 함수(메서드)
-
-		// [생성자] 변수를 초기화합니다.
-		public PlayerIdleState(PlayerControllerBase controller) : base(controller)
-		{
-			bool isComponentFound = controller.TryGetComponent(out _animator);
-			
-			if (!isComponentFound)
-				Debug.LogError("[PlayerIdleState] 컴포넌트를 가져오는 데 실패했습니다!");
-		}
-
-		#region 재정의 함수
-
-		// [재정의 함수] IPlayerState 인터페이스 관련
-		protected override void Enter()
-		{
-			PlayAnimation(); // 애니메이션을 재생합니다.
-		}
-
-		protected override void Execute()
-		{
-			// CheckIdleAnimation() 함수를 호출하지 않기 위해 재정의합니다.
-			InvokeInput(); // 입력을 처리합니다.
-
-			Debug.Log("PlayerIdleState Execute!");
-		}
-
-		protected override void Exit()
-		{
-			base.Exit();
-			StopAnimation(); // 애니메이션을 정지합니다.
-		}
-
-		#endregion 재정의 함수
-
-		// [함수] 애니메이션을 재생합니다.
-		private void PlayAnimation()
-		{
-			_animator.SetBool(_isIdleAnimatorHash, true);
-		}
-
-		// [함수] 애니메이션을 정지합니다.
-		private void StopAnimation()
-		{
-			_animator.SetBool(_isIdleAnimatorHash, false);
-		}
-
-		#endregion 함수(메서드)
+		// ※ Idle 상태는 다른 상태에서 애니메이션의 Exit Time 등으로 스스로 전환되므로, 별도의 작업을 해주지 않습니다.
+		protected override void Enter() { Debug.Log("Idle 상태에 진입합니다!"); }
+		protected override void Exit() { }
 	}
 }

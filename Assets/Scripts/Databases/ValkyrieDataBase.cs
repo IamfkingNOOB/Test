@@ -5,13 +5,13 @@ namespace EntityDatabase
 	/// </summary>
 	internal class ValkyrieDataBase
 	{
-		public int ID { get; init; } // 발키리의 식별자(ID)
-		public string Name { get; init; } // 발키리의 이름
-		public int HealthPoint { get; init; } // 발키리의 체력(HP)
-		public int SkillPoint { get; init; } // 발키리의 기력(SP)
+		internal int ID { get; init; } // 발키리의 식별자(ID)
+		internal string Name { get; init; } // 발키리의 이름
+		internal int HealthPoint { get; init; } // 발키리의 체력(HP)
+		internal int SkillPoint { get; init; } // 발키리의 기력(SP)
 
-		public int UltimateCost { get; init; } // 발키리의 필살기 기력 소모량
+		internal int UltimateCost { get; init; } // 발키리의 필살기 기력 소모량
 
-		public UnityEngine.GameObject PrefabModel{ get; init; } // 발키리의 모델 프리팹
+		internal UnityEngine.GameObject PrefabModel{ get; init; } // 발키리의 모델 프리팹
 	}
 }

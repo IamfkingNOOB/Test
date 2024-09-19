@@ -18,7 +18,7 @@ namespace PlayerSystem
 		#region 함수(메서드)
 
 		// [생성자] 변수를 초기화합니다.
-		public PlayerUltimateState(PlayerControllerBase controller) : base(controller)
+		internal PlayerUltimateState(PlayerControllerBase controller) : base(controller)
 		{
 			bool isComponentFound = controller.TryGetComponent(out _animator);
 			
@@ -36,7 +36,6 @@ namespace PlayerSystem
 
 		protected override void Exit()
 		{
-			base.Exit();
 			StopAnimation(); // 애니메이션을 정지합니다.
 		}
 
