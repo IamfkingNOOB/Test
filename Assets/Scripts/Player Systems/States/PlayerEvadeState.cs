@@ -8,9 +8,13 @@ namespace PlayerSystem
 	internal class PlayerEvadeState : PlayerStateBase
 	{
 		#region 변수(필드)
+		
 		// [변수] 애니메이터(Animator)의 컴포넌트 및 매개변수
 		private readonly Animator _animator; // 애니메이터의 컴포넌트
 		private readonly int _evadeAnimatorHash = Animator.StringToHash("Evade"); // 애니메이터의 매개변수 해시 (Trigger)
+
+		private int _evadeCurrentCount = 0; // 현재 수행한 회피 횟수
+		private readonly int _evadeMaxCount = 2; // 수행 가능한 연속 회피 횟수
 
 		#endregion 변수(필드)
 
@@ -41,7 +45,10 @@ namespace PlayerSystem
 		// [재정의 함수] IPlayerInput 인터페이스 관련
 		protected override void Evade()
 		{
-			InputBuffer = PlayAnimation; // 애니메이션을 재생합니다.
+			if (_evadeCurrentCount < _evadeMaxCount) // 연속 회피가 가능할 때만,
+			{
+				InputBuffer = PlayAnimation; // 애니메이션을 재생합니다.
+			}
 		}
 
 		#endregion 재정의 함수
@@ -50,12 +57,20 @@ namespace PlayerSystem
 		private void PlayAnimation()
 		{
 			_animator.SetTrigger(_evadeAnimatorHash);
+			_evadeCurrentCount++;
 		}
 
 		// [함수] 애니메이션을 정지합니다.
 		private void StopAnimation()
 		{
 			_animator.ResetTrigger(_evadeAnimatorHash);
+			_evadeCurrentCount = 0;
+		}
+
+		// [함수] 회피 스킬을 발동합니다.
+		internal void ActivateEvadeSkill()
+		{
+			Controller.BattleData.ActivateEvadeSkill();
 		}
 
 		#endregion 함수(메서드)

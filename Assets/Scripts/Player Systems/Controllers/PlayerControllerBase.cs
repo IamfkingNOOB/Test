@@ -43,21 +43,20 @@ namespace PlayerSystem
 		// [유니티 충돌 이벤트 함수] OnTriggerEnter()
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.CompareTag("Monster"))
+			if (other.CompareTag("Monster")) // 몬스터와 충돌했을 때,
 			{
-				// if (_currentState is PlayerEvadeState)
-				// {
-				// 	// 시공 단열을 연다.
-				// 	(PlayerEvadeState)_currentState.OpenTimeMastery();
-				// }
+				if (_currentState is PlayerEvadeState evadeState) // 플레이어가 회피 중이라면,
+				{
+					evadeState.ActivateEvadeSkill(); // 회피 스킬을 발동합니다.
+				}
 				// else if (_currentState is PlayerDieState)
 				// {
 				// 	return;
 				// }
-				// else
-				// {
-				// 	ChangeState<PlayerHitState>();
-				// }
+				else // 그 외에는,
+				{
+					ChangeState<PlayerHitState>(); // 피격 상태가 됩니다.
+				}
 			}
 		}
 

@@ -37,7 +37,6 @@ namespace PlayerSystem
 		protected override void Enter()
 		{
 			PlayAnimation(); // 애니메이션을 재생합니다.
-			Debug.Log("Move 상태에 진입합니다!");
 		}
 
 		protected override void Execute()

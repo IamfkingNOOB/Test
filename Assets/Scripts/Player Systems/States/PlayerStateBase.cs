@@ -56,12 +56,15 @@ namespace PlayerSystem
 
 		// [추상화 함수] IPlayerInput 인터페이스 함수를 자식 클래스에서 재정의하기 위한 함수
 		// protected abstract void Move(Vector2 inputVector);
-		protected virtual void Evade() => InputBuffer = () => Controller.ChangeState<PlayerEvadeState>();
+		protected virtual void Evade()
+		{
+			InputBuffer = () => Controller.ChangeState<PlayerEvadeState>();
+		}
 		protected virtual void Attack() => InputBuffer = () => Controller.ChangeState<PlayerAttackState>();
 		protected virtual void WeaponSkill() => InputBuffer = () => Controller.ChangeState<PlayerWeaponSkillState>();
 		protected virtual void Ultimate() => InputBuffer = () =>
 		{
-			if (Controller.BattleData.UseUltimate()) Controller.ChangeState<PlayerUltimateState>();
+			if (Controller.BattleData.ActivateUltimate()) Controller.ChangeState<PlayerUltimateState>();
 		};
 		protected virtual void PetSkill() => InputBuffer = () => Controller.ChangeState<PlayerPetSkillState>();
 		

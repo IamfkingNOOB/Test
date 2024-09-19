@@ -32,6 +32,15 @@ namespace PlayerSystem
 			private set => SetField(ref _currentSkillPoint, value, nameof(CurrentSkillPoint));
 		}
 		internal int MaxSkillPoint { get; init; } // 최대 기력
+		
+		// [변수] 회피 스킬(Evade Skill)
+		private float _currentEvadeSkillCoolTime; // 남은 재사용 대기 시간
+		internal float CurrentEvadeSkillCoolTime
+		{
+			get => _currentEvadeSkillCoolTime;
+			private set => SetField(ref _currentEvadeSkillCoolTime, value, nameof(CurrentEvadeSkillCoolTime));
+		}
+		internal float MaxEvadeSkillCoolTime { get; init; } // 기본 재사용 대기 시간
 
 		// [변수] 필살기(Ultimate)
 		internal int UltimateCost { get; init; } // 기력 소모량
@@ -41,7 +50,7 @@ namespace PlayerSystem
 			get => _currentUltimateCoolTime;
 			private set => SetField(ref _currentUltimateCoolTime, value, nameof(CurrentUltimateCoolTime));
 		}
-		internal int MaxUltimateCoolTime { get; init; } // 기본 재사용 대기 시간
+		internal float MaxUltimateCoolTime { get; init; } // 기본 재사용 대기 시간
 
 		#endregion 변수(필드)
 		
@@ -85,28 +94,54 @@ namespace PlayerSystem
 		internal void ChargeSkillPoint(int sp) => CurrentSkillPoint = Mathf.Min(CurrentSkillPoint + sp, MaxSkillPoint); // 고정값
 		internal void ChargeSkillPoint(float percentage) => ChargeSkillPoint(Mathf.FloorToInt(MaxSkillPoint * percentage)); // 비율값
 
-		// [함수] 필살기를 발동합니다. 현재 기력이 소모량 이상이고, 재사용 대기 시간이 아니어야만 발동할 수 있습니다.
-		internal bool UseUltimate()
+		// [함수] 회피 스킬을 발동합니다.
+		internal bool ActivateEvadeSkill()
+		{
+			bool usable = _currentEvadeSkillCoolTime <= 0.0f; // 재사용 대기 시간이 아니어야만 발동할 수 있습니다.
+
+			if (usable)
+			{
+				_controller.StartCoroutine(StartEvadeSkillCoolTime()); // 재사용 대기 시간을 적용하는 코루틴을 시작합니다.
+			}
+			
+			return usable;
+		}
+		
+		// [함수] 필살기를 발동합니다. 
+		internal bool ActivateUltimate()
 		{
 			bool usable = _currentSkillPoint >= UltimateCost && _currentUltimateCoolTime <= 0.0f;
 			
+			// 현재 기력이 소모량 이상이고, 재사용 대기 시간이 아니어야만 발동할 수 있습니다.
 			if (usable)
 			{
-				CurrentSkillPoint -= UltimateCost; // 필살기의 기력 소모량만큼 기력을 소모하고,
-				
-				// 필살기의 재사용 대기 시간을 적용합니다.
-				CurrentUltimateCoolTime = MaxUltimateCoolTime;
-				_controller.StartCoroutine(StartUltimateCoolTime());
-				
-				return true;
+				_controller.StartCoroutine(StartUltimateCoolTime()); // 재사용 대기 시간을 적용하는 코루틴을 시작합니다.
 			}
-			return false;
+			
+			return usable;
+		}
+
+		// [코루틴] 회피 스킬의 재사용 대기 시간을 적용합니다.
+		private IEnumerator StartEvadeSkillCoolTime()
+		{
+			CurrentUltimateCoolTime = MaxUltimateCoolTime; // 재사용 대기 시간을 적용합니다.
+			
+			while (CurrentEvadeSkillCoolTime > 0.0f) // 재사용 대기 시간이 0초 이하가 될 때까지,
+			{
+				CurrentEvadeSkillCoolTime -= Time.deltaTime; // 시간이 흐른 만큼 재사용 대기 시간을 감소시킵니다.
+				yield return null;
+			}
+
+			CurrentEvadeSkillCoolTime = 0.0f; // 0초 이하가 되었다면, 정확히 0초로 설정하고 코루틴을 종료합니다.
 		}
 
 		// [코루틴] 필살기의 재사용 대기 시간을 적용합니다.
 		private IEnumerator StartUltimateCoolTime()
 		{
-			while (_currentUltimateCoolTime > 0.0f) // 재사용 대기 시간이 0초 이하가 아니라면,
+			CurrentEvadeSkillCoolTime = MaxEvadeSkillCoolTime; // 재사용 대기 시간을 적용하고,
+			CurrentSkillPoint -= UltimateCost; // 필살기의 기력 소모량만큼 기력을 소모합니다.
+			
+			while (CurrentUltimateCoolTime > 0.0f) // 재사용 대기 시간이 0초 이하가 될 때까지,
 			{
 				CurrentUltimateCoolTime -= Time.deltaTime; // 시간이 흐른 만큼 재사용 대기 시간을 감소시킵니다.
 				yield return null;
