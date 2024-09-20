@@ -1,10 +1,13 @@
-using System.Collections;
+using Framework;
+using PlayerSystem;
 using UnityEngine;
 
-internal class GameManager : MonoBehaviour
+internal class GameManager : SingletonMonoBehaviour<GameManager>
 {
-	internal void RunCoroutine(IEnumerator coroutine)
+	[SerializeField] private PlayerUserInterface playerUI;
+	
+	internal void GetCurrentOnFieldPlayer(PlayerControllerBase controller)
 	{
-		StartCoroutine(coroutine);
+		playerUI.SetPlayerData(controller.BattleData);
 	}
 }

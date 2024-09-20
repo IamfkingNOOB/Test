@@ -10,7 +10,7 @@ namespace PlayerSystem
 	/// </summary>
 	internal class PlayerControllerBase : MonoBehaviour, IPlayerInput
 	{
-		#region 변수(필드)
+		#region 변수(필드);
 		
 		// [변수] 플레이어(발키리)의 데이터
 		internal ValkyrieBattleData BattleData { get; private set; }
@@ -32,6 +32,11 @@ namespace PlayerSystem
 		private void Awake()
 		{
 			InitializeCache(); // 캐시를 초기화합니다.
+		}
+
+		private void OnEnable()
+		{
+			// GameManager.Instance.GetCurrentOnFieldPlayer(this);
 		}
 
 		// [유니티 생명 주기 함수] Update()
@@ -72,7 +77,7 @@ namespace PlayerSystem
 				{ typeof(PlayerWeaponSkillState), new PlayerWeaponSkillState(this) },
 				{ typeof(PlayerUltimateState), new PlayerUltimateState(this) },
 				{ typeof(PlayerPetSkillState), new PlayerPetSkillState(this) },
-				// { typeof(PlayerHitState), new PlayerHitState(this) },
+				{ typeof(PlayerHitState), new PlayerHitState(this) },
 				// { typeof(PlayerDieState), new PlayerDieState(this) },
 			};
 			
