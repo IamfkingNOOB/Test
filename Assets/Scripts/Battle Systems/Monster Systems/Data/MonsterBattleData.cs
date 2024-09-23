@@ -31,4 +31,6 @@ internal class MonsterBattleData : INotifyPropertyChanged
 			InvokePropertyChanged(propertyName); // 이벤트를 호출합니다.
 		}
 	}
+
+	internal bool IsHit { get; set; }
 }

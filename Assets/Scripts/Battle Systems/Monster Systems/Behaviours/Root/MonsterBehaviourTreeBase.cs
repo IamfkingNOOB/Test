@@ -33,12 +33,29 @@ namespace MonsterSystem
 		// [함수] 노드를 구성합니다.
 		private INode SetTreeNode()
 		{
-			INode rootNode = new SelectorNode(new List<INode>()
+			/*
+													                 Root
+													                   ┃
+												                   Selector
+				             ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			             Selector                                                                             Selector
+		            ┏━━━━━━━━┻━━━━━━━━┓                                       ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━┓
+	            Sequence          Sequence                                Sequence                            Sequence       Patrol
+	            ┏━━━┻━━━━┓       ┏━━━━┻━━━━┓            ┏━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━┓            ┏━━━━━━┻━━━━━┓
+            CheckDead → Die  CheckHit → GetHit  CheckNearToAttack → CheckForwardToAttack → Attack  CheckNearToChase → Chase
+            */
+			
+			INode rootNode = new SelectorNode(new List<INode>
 			{
-				new SequenceNode(new List<INode>()
+				new SequenceNode(new List<INode>
+				{
+					new IsDeadNode(_controller), new DieNode(_controller)
+				}),
+				
+				new SequenceNode(new List<INode>
 				{
 					
-				}),
+				})
 			});
 
 			return rootNode;
