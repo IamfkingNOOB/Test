@@ -16,6 +16,11 @@ namespace MonsterSystem
 		internal HitNode(MonsterControllerBase controller)
 		{
 			_controller = controller;
+
+			if (!_controller.TryGetComponent(out _animator))
+			{
+				Debug.LogError("몬스터의 컨트롤러에서 애니메이터(Animator) 컴포넌트를 찾을 수 없습니다!");
+			}
 		}
 		
 		// [인터페이스 함수] 노드를 평가합니다.
