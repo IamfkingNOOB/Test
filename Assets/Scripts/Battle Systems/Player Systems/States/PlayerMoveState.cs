@@ -58,6 +58,7 @@ namespace PlayerSystem
 		private void PlayAnimation()
 		{
 			_animator.SetBool(_isMoveAnimatorHash, true);
+			Debug.Log("Move 상태에 진입합니다!");
 		}
 
 		// [함수] 애니메이션을 정지합니다.

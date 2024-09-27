@@ -35,11 +35,6 @@ namespace PlayerSystem
 			InitializeCache(); // 캐시를 초기화합니다.
 		}
 
-		private void OnEnable()
-		{
-			// GameManager.Instance.GetCurrentOnFieldPlayer(this);
-		}
-
 		// [유니티 생명 주기 함수] Update()
 		private void Update()
 		{
@@ -81,6 +76,8 @@ namespace PlayerSystem
 				{ typeof(PlayerHitState), new PlayerHitState(this) },
 				// { typeof(PlayerDieState), new PlayerDieState(this) },
 			};
+
+			_stateCache.TryAdd(typeof(PlayerIdleState), new PlayerAttackState(this));
 			
 			// 첫 상태는 Idle로 지정합니다.
 			ChangeState<PlayerIdleState>();
@@ -93,7 +90,7 @@ namespace PlayerSystem
 		}
 
 		// [함수] 플레이어의 상태를 바꿉니다. 상태 클래스에서 호출합니다.
-		internal void ChangeState<T>()
+		internal void ChangeState<T>() where T : PlayerStateBase
 		{
 			// 같은 상태로 바꾸고자 할 경우, 무시합니다.
 			if (_currentState == _stateCache[typeof(T)]) return;

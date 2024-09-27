@@ -1,4 +1,5 @@
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace PlayerSystem
 {
@@ -26,7 +27,7 @@ namespace PlayerSystem
 			bool isComponentFound = controller.TryGetComponent(out _animator);
 
 			if (!isComponentFound)
-				Debug.LogError("[PlayerIdleState] 컴포넌트를 가져오는 데 실패했습니다!");
+				Debug.LogError("[PlayerEvadeState] 컴포넌트를 가져오는 데 실패했습니다!");
 		}
 
 		#region 재정의 함수
@@ -35,6 +36,7 @@ namespace PlayerSystem
 		protected override void Enter()
 		{
 			PlayAnimation(); // 애니메이션을 재생합니다.
+			Debug.Log("Evade 상태에 진입합니다!");
 		}
 
 		protected override void Exit()
