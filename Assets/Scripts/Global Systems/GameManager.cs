@@ -6,8 +6,8 @@ internal class GameManager : SingletonMonoBehaviour<GameManager>
 {
 	[SerializeField] private PlayerUserInterface playerUI;
 	
-	internal void GetCurrentOnFieldPlayer(PlayerControllerBase controller)
+	internal void GetCurrentOnFieldPlayer(PlayerStateController controller)
 	{
-		playerUI.SetPlayerData(controller.BattleData);
+		// playerUI.SetPlayerData(controller.BattleData);
 	}
 }

@@ -204,7 +204,11 @@ GameObject:
   - component: {fileID: 3790505409404463694}
   - component: {fileID: 1557849161354056235}
   - component: {fileID: 1474953193205297990}
-  - component: {fileID: 3753676097886373734}
+  - component: {fileID: 7289898026104682613}
+  - component: {fileID: 3076665337602532839}
+  - component: {fileID: 7983732274225425992}
+  - component: {fileID: 1557574669028254689}
+  - component: {fileID: 3459017712852618149}
   m_Layer: 0
   m_Name: '[Capsule] Player'
   m_TagString: Player
@@ -294,7 +298,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -350,8 +354,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3753676097886373734}
-        m_TargetAssemblyTypeName: PlayerSystem.PlayerControllerBase, Assembly-CSharp
+      - m_Target: {fileID: 3076665337602532839}
+        m_TargetAssemblyTypeName: PlayerSystem_Ver2.PlayerInputController, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -366,8 +370,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3753676097886373734}
-        m_TargetAssemblyTypeName: PlayerSystem.PlayerControllerBase, Assembly-CSharp
+      - m_Target: {fileID: 3076665337602532839}
+        m_TargetAssemblyTypeName: PlayerSystem_Ver2.PlayerInputController, Assembly-CSharp
         m_MethodName: OnAttack
         m_Mode: 0
         m_Arguments:
@@ -382,8 +386,8 @@ MonoBehaviour:
     m_ActionName: Player/Attack[/Keyboard/k]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3753676097886373734}
-        m_TargetAssemblyTypeName: PlayerSystem.PlayerControllerBase, Assembly-CSharp
+      - m_Target: {fileID: 3076665337602532839}
+        m_TargetAssemblyTypeName: PlayerSystem_Ver2.PlayerInputController, Assembly-CSharp
         m_MethodName: OnEvade
         m_Mode: 0
         m_Arguments:
@@ -405,7 +409,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3753676097886373734
+--- !u!114 &7289898026104682613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -414,6 +418,60 @@ MonoBehaviour:
   m_GameObject: {fileID: 5010307720592112748}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cddeea61c18ce24098561d71e30411f, type: 3}
+  m_Script: {fileID: 11500000, guid: 17b184c081d44134e97ca90ca4c27e09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
+--- !u!114 &3076665337602532839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5010307720592112748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec8670b8786e5e498cc58008f625f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateController: {fileID: 7289898026104682613}
+--- !u!114 &7983732274225425992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5010307720592112748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1297ca5bfc90074eaa57dd7a8036106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateController: {fileID: 7289898026104682613}
+  inputController: {fileID: 3076665337602532839}
+--- !u!114 &1557574669028254689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5010307720592112748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 440cce904e2a0f141bb4ca778d4edb02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateController: {fileID: 7289898026104682613}
+  statusController: {fileID: 3459017712852618149}
+--- !u!114 &3459017712852618149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5010307720592112748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3597874ca2a6b954ca28a3a459bec6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

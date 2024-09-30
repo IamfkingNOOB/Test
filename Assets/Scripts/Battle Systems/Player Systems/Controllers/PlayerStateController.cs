@@ -2,7 +2,7 @@ using System;
 using Framework.StatePattern;
 using UnityEngine;
 
-namespace PlayerSystem_Ver2
+namespace PlayerSystem
 {
 	/// <summary>
 	/// [클래스] 플레이어의 상태 시스템을 관리합니다.
@@ -10,17 +10,22 @@ namespace PlayerSystem_Ver2
 	internal class PlayerStateController : MonoBehaviour
 	{
 		#region 변수(필드)
-
+		
 		private IState _currentState; // [변수] 플레이어의 현재 상태
 		internal event Action<IState> OnStateChanged; // [이벤트] 현재 상태가 바뀔 때 발생합니다.
 
 		// [변수] 플레이어를 추적하는 카메라; Move 상태에서 필요합니다.
-		[SerializeField] private Transform playerCamera;
-		internal Transform PlayerCamera => playerCamera;
+		internal Transform PlayerCamera { get; private set; }
 
 		#endregion 변수(필드)
 
 		#region 함수(메서드)
+
+		// [유니티 생명 주기 함수] Awake()
+		private void Awake()
+		{
+			PlayerCamera = Camera.main?.transform; // 플레이어의 카메라를 메인 카메라로 지정합니다.
+		}
 
 		// [유니티 생명 주기 함수] Update()
 		private void Update()

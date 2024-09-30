@@ -3,7 +3,7 @@ using Framework.StatePattern;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace PlayerSystem_Ver2
+namespace PlayerSystem
 {
 	/// <summary>
 	/// [클래스] 플레이어의 입력 시스템을 관리합니다.
@@ -96,7 +96,7 @@ namespace PlayerSystem_Ver2
 
 		public void OnUltimate(InputAction.CallbackContext context)
 		{
-			/* 궁극기 버튼이 누른 시간에 따라 다른 역할을 할 경우:
+			/* 필살기 버튼이 누른 시간에 따라 다른 역할을 할 경우:
 			if (context.started)
 			{
 				_inputBuffer = () => _currentState?.ActivateUltimate(false);

@@ -10,33 +10,43 @@ namespace PlayerSystem
 	{
 		#region 변수(필드)
 		
-		// [변수] 애니메이터(Animator)의 컴포넌트 및 매개변수
-		private readonly Animator _animator; // 애니메이터의 컴포넌트
-		private readonly int _evadeAnimatorHash = Animator.StringToHash("Evade"); // 애니메이터의 매개변수 해시 (Trigger)
+		// [변수] 상태 컨트롤러
+		private readonly PlayerStateController _controller;
+		
+		// [변수] 애니메이터 및 매개변수
+		private readonly Animator _animator;
+		private readonly int _evadeAnimatorHash = Animator.StringToHash("Evade"); // 매개변수 트리거(Trigger)
 
+		// [변수] 회피 횟수
 		private int _evadeCurrentCount = 0; // 현재 수행한 회피 횟수
-		private readonly int _evadeMaxCount = 2; // 수행 가능한 연속 회피 횟수
+		private const int EvadeMaxCount = 2; // 수행 가능한 연속 회피 횟수
 
 		#endregion 변수(필드)
 
 		#region 함수(메서드)
 
 		// [생성자] 변수를 초기화합니다.
-		internal PlayerEvadeState(PlayerControllerBase controller) : base(controller)
+		internal PlayerEvadeState(PlayerStateController controller)
 		{
-			bool isComponentFound = controller.TryGetComponent(out _animator);
+			_controller = controller;
 
-			if (!isComponentFound)
+			if (!_controller.TryGetComponent(out _animator))
+			{
 				Debug.LogError("[PlayerEvadeState] 컴포넌트를 가져오는 데 실패했습니다!");
+			}
 		}
 
-		#region 재정의 함수
+		#region 재정의 함수 (IState)
 
-		// [재정의 함수] IPlayerState 인터페이스 관련
 		protected override void Enter()
 		{
 			PlayAnimation(); // 애니메이션을 재생합니다.
 			Debug.Log("Evade 상태에 진입합니다!");
+		}
+
+		protected override void Execute()
+		{
+			
 		}
 
 		protected override void Exit()
@@ -44,16 +54,43 @@ namespace PlayerSystem
 			StopAnimation(); // 애니메이션을 정지합니다.
 		}
 		
+		#endregion 재정의 함수 (IState)
+
+		protected override void Move(Vector2 inputVector)
+		{
+			if (inputVector.sqrMagnitude != 0.0f)
+			{
+				_controller.ChangeState(new PlayerMoveState(_controller, inputVector));
+			}
+		}
+		
+		#region 재정의 함수 (IPlayerInput)
+
 		// [재정의 함수] IPlayerInput 인터페이스 관련
 		protected override void Evade()
 		{
-			if (_evadeCurrentCount < _evadeMaxCount) // 연속 회피가 가능할 때만,
+			if (_evadeCurrentCount < EvadeMaxCount) // 연속 회피가 가능할 때만,
 			{
-				InputBuffer = PlayAnimation; // 애니메이션을 재생합니다.
+				PlayAnimation(); // 애니메이션을 재생합니다.
 			}
 		}
 
-		#endregion 재정의 함수
+		protected override void Attack()
+		{
+			// _controller.ChangeState(new PlayerAttackState(_controller));
+		}
+
+		protected override void ActivateWeaponSkill()
+		{
+			// _controller.ChangeState(new PlayerWeaponSkillState(_controller));
+		}
+
+		protected override void ActivateUltimate()
+		{
+			// _controller.ChangeState(new PlayerUltimateState(_controller));
+		}
+
+		#endregion 재정의 함수 (IPlayerInput)
 
 		// [함수] 애니메이션을 재생합니다.
 		private void PlayAnimation()
@@ -70,9 +107,9 @@ namespace PlayerSystem
 		}
 
 		// [함수] 회피 스킬을 발동합니다.
-		internal void ActivateEvadeSkill()
+		public void ActivateEvadeSkill()
 		{
-			Controller.BattleData.ActivateEvadeSkill();
+			
 		}
 
 		#endregion 함수(메서드)

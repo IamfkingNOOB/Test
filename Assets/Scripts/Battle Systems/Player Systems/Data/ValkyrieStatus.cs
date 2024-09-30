@@ -8,10 +8,10 @@ namespace PlayerSystem
 	/// <summary>
 	/// [클래스] 발키리의 기본 데이터 중에서, 전투에 사용하는 데이터만을 모아 관리하는 클래스입니다.
 	/// </summary>
-	internal class PlayerBattleData : INotifyPropertyChanged
+	internal class PlayerStatus : INotifyPropertyChanged
 	{
 		// [변수] 플레이어의 컨트롤러로, 코루틴 등 MonoBehaviour의 속성을 사용하기 위한 참조입니다.
-		private readonly PlayerControllerBase _controller;
+		private readonly PlayerStatusController _controller;
 		
 		#region 변수(필드)
 		
@@ -57,7 +57,7 @@ namespace PlayerSystem
 		#region 함수(메서드)
 		
 		// [생성자] 컨트롤러의 참조를 받아 저장합니다.
-		internal PlayerBattleData(PlayerControllerBase controller)
+		internal PlayerStatus(PlayerStatusController controller)
 		{
 			_controller = controller;
 		}

@@ -20,6 +20,6 @@ namespace MonsterSystem
 		NodeState INode.Evaluate() => CheckIsDead() ? NodeState.Success : NodeState.Failure;
 
 		// [함수] 몬스터의 현재 체력이 0 이하일 경우, 쓰러진 것으로 간주합니다.
-		private bool CheckIsDead() => _controller.BattleData.CurrentHealthPoint > 0;
+		private bool CheckIsDead() => _controller.BattleData.CurrentHealthPoint <= 0;
 	}
 }

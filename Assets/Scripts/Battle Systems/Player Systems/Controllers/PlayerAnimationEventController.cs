@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PlayerSystem_Ver2
+namespace PlayerSystem
 {
 	/// <summary>
 	/// [클래스] 플레이어의 애니메이션 이벤트를 관리합니다.

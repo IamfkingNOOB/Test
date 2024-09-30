@@ -10,7 +10,7 @@ namespace MonsterSystem
 	internal class MonsterBehaviourTreeBase : MonoBehaviour
 	{
 		// [변수] 몬스터의 컨트롤러
-		private MonsterControllerBase _controller;
+		[SerializeField] private MonsterControllerBase controller;
 
 		// [변수] 몬스터의 행동 트리에 사용할 최상위 노드
 		private INode _rootNode;
@@ -18,7 +18,7 @@ namespace MonsterSystem
 		// [유니티 생명 주기 함수] Awake()
 		private void Awake()
 		{
-			if (TryGetComponent(out _controller))
+			if (controller)
 			{
 				_rootNode = SetTreeNode(); // 최상위 노드를 설정합니다.
 			}
@@ -49,7 +49,7 @@ namespace MonsterSystem
 			{
 				new SequenceNode(new List<INode>
 				{
-					new IsDeadNode(_controller), new DieNode(_controller)
+					new IsDeadNode(controller), new DieNode(controller)
 				}),
 				
 				new SequenceNode(new List<INode>

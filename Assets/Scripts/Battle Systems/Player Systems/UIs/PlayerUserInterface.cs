@@ -19,14 +19,14 @@ namespace PlayerSystem
 		[SerializeField] private TextMeshProUGUI skillPointText;
 
 		// [변수] UI가 사용할 플레이어의 정보
-		private PlayerBattleData _playerData;
+		private PlayerStatus _playerData;
 
 		#endregion 변수(필드)
 
 		#region 함수(메서드)
 
 		// [함수] UI에 표시할 플레이어를 지정합니다. 다른 클래스에서 호출합니다.
-		internal void SetPlayerData(PlayerBattleData playerData)
+		internal void SetPlayerData(PlayerStatus playerData)
 		{
 			_playerData.PropertyChanged -= OnPropertyChanged; // 기존 플레이어의 이벤트에 등록되어 있던 함수를 해제합니다.
 			_playerData = playerData; // 새로운 플레이어의 정보를 저장합니다.
