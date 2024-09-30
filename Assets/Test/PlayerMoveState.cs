@@ -14,7 +14,7 @@ namespace PlayerSystem_Ver2
 
 		// [변수] 애니메이터 및 매개변수
 		private readonly Animator _animator;
-		private readonly int _moveAnimatorHash = Animator.StringToHash("isMove"); // 매개변수 해시 (Bool)
+		private readonly int _moveAnimatorHash = Animator.StringToHash("IsMove"); // 매개변수 해시 (Bool)
 
 		// [변수] 플레이어를 비추는 카메라
 		private readonly Transform _playerCamera;
@@ -60,7 +60,7 @@ namespace PlayerSystem_Ver2
 
 		protected override void Exit()
 		{
-			StopAnimation();
+			StopAnimation(); // 애니메이션을 정지합니다.
 		}
 
 		#endregion 재정의 함수 (IState)
@@ -79,17 +79,17 @@ namespace PlayerSystem_Ver2
 
 		protected override void Attack()
 		{
-			// _controller.ChangeState(new PlayerAttackState(_controller));
+			_controller.ChangeState(new PlayerAttackState(_controller));
 		}
 
 		protected override void ActivateWeaponSkill()
 		{
-			// _controller.ChangeState(new PlayerWeaponSkillState(_controller));
+			_controller.ChangeState(new PlayerWeaponSkillState(_controller));
 		}
 
 		protected override void ActivateUltimate()
 		{
-			// _controller.ChangeState(new PlayerUltimateState(_controller));
+			_controller.ChangeState(new PlayerUltimateState(_controller));
 		}
 
 		#endregion 재정의 함수 (IPlayerInput)

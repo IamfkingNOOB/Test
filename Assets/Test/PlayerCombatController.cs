@@ -46,8 +46,6 @@ namespace PlayerSystem_Ver2
 					// 피격 상태가 됩니다.
 					stateController.ChangeState(new PlayerHitState(stateController, monsterAttacker));
 				}
-				
-				
 			}
 		}
 	}

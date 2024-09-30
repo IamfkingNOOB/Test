@@ -1,4 +1,4 @@
-using Framework.Singleton;
+using Frameworks.Singleton;
 using PlayerSystem;
 using UnityEngine;
 
