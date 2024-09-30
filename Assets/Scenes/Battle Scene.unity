@@ -2832,6 +2832,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7748198484252618950, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
   m_PrefabInstance: {fileID: 3796215780584580849}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1603620756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603620751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 440cce904e2a0f141bb4ca778d4edb02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateController: {fileID: 1603620758}
+--- !u!114 &1603620757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603620751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1297ca5bfc90074eaa57dd7a8036106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateController: {fileID: 1603620758}
+  inputController: {fileID: 1603620759}
+--- !u!114 &1603620758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603620751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b184c081d44134e97ca90ca4c27e09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 963194228}
+--- !u!114 &1603620759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603620751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec8670b8786e5e498cc58008f625f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateController: {fileID: 1603620758}
 --- !u!1 &1609646777
 GameObject:
   m_ObjectHideFlags: 3
@@ -3368,6 +3421,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 13843664}
     m_Modifications:
+    - target: {fileID: 1474953193205297990, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1603620759}
+    - target: {fileID: 1474953193205297990, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1603620759}
+    - target: {fileID: 1474953193205297990, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1603620759}
+    - target: {fileID: 1474953193205297990, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474953193205297990, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474953193205297990, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnEvade
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474953193205297990, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerSystem_Ver2.PlayerInputController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474953193205297990, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerSystem_Ver2.PlayerInputController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474953193205297990, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerSystem_Ver2.PlayerInputController, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3365915216960913008, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
       propertyPath: m_Name
       value: '[Transform] Player'
@@ -3412,10 +3501,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3753676097886373734, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3753676097886373734, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5010307720592112748, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1603620758}
+    - targetCorrespondingSourceObject: {fileID: 5010307720592112748, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1603620759}
+    - targetCorrespondingSourceObject: {fileID: 5010307720592112748, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1603620757}
+    - targetCorrespondingSourceObject: {fileID: 5010307720592112748, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1603620756}
   m_SourcePrefab: {fileID: 100100000, guid: d8eda1322d986c94699942c45cecb03b, type: 3}
 --- !u!1 &3796215780584580850 stripped
 GameObject:
