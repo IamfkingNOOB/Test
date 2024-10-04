@@ -3,17 +3,20 @@ using UnityEngine;
 
 namespace MonsterSystem
 {
-	internal class HitNode : INode
+	/// <summary>
+	/// [클래스] 몬스터의 피격을 처리하는 노드입니다.
+	/// </summary>
+	internal class MonsterHitNode : INode
 	{
 		// [변수] 몬스터의 컨트롤러
-		private MonsterControllerBase _controller;
+		private readonly MonsterControllerBase _controller;
 		
-		// [변수] 애니메이터(Animator)의 컴포넌트 및 매개변수
-		private Animator _animator;
-		private readonly int _hitAnimatorHash = Animator.StringToHash("Hit"); // 애니메이터의 매개변수 해시 (Trigger)
+		// [변수] 애니메이터 및 매개변수
+		private readonly Animator _animator;
+		private readonly int _hitAnimatorHash = Animator.StringToHash("Hit"); // 매개변수 해시 (Trigger)
 
 		// [생성자] 변수를 초기화합니다.
-		internal HitNode(MonsterControllerBase controller)
+		internal MonsterHitNode(MonsterControllerBase controller)
 		{
 			_controller = controller;
 

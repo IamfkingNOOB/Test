@@ -3,11 +3,14 @@ using UnityEngine.Pool;
 
 namespace Frameworks.ObjectPool
 {
-	// [일반화 클래스] 오브젝트 풀링을 관리합니다.
+	/// <summary>
+	/// [클래스] 오브젝트 풀링을 관리합니다.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	internal class ObjectPoolManager<T> : MonoBehaviour where T : MonoBehaviour, IObjectPoolItem<T>
 	{
 		[SerializeField] private T poolPrefab; // [변수] 오브젝트 풀링에 사용할 아이템의 프리팹
-		private IObjectPool<T> _pool; // [변수] 오브젝트 풀링 인터페이스 (UnityEngine.Pool)
+		protected IObjectPool<T> Pool; // [변수] 오브젝트 풀링 인터페이스 (UnityEngine.Pool)
 
 		// [변수] IObjectPool<T>의 매개변수들
 		[SerializeField] private bool collectionCheck; 
@@ -26,14 +29,14 @@ namespace Frameworks.ObjectPool
 		{
 			if (!poolPrefab) // 프리팹이 등록되어 있지 않으면,
 			{
-				Debug.LogError("프리팹을 등록하지 않았습니다!"); // 오류 로그를 출력합니다.
+				Debug.LogError("[ObjectPoolManager] 프리팹을 등록하지 않았습니다!"); // 오류 로그를 출력합니다.
 			}
 		}
 
 		// [함수] 오브젝트 풀을 초기화합니다.
 		private void InitPool()
 		{
-			_pool = new ObjectPool<T>(
+			Pool = new ObjectPool<T>(
 				createFunc: CreateItem, actionOnGet: OnGetItem,
 				actionOnRelease: OnReleaseItem, actionOnDestroy: OnDestroyItem,
 				collectionCheck: collectionCheck, defaultCapacity: defaultCapacity, maxSize: maxSize);
@@ -43,7 +46,7 @@ namespace Frameworks.ObjectPool
 		private T CreateItem()
 		{
 			T newItem = Instantiate(poolPrefab); // 프리팹을 생성합니다.
-			newItem.GetPool(_pool); // 아이템이 매니저가 가진 풀을 참조하도록 합니다.
+			newItem.GetPool(Pool); // 아이템이 매니저가 가진 풀을 참조하도록 합니다.
 			return newItem;
 		}
 
