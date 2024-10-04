@@ -1,6 +1,6 @@
 using System;
 
-namespace Framework.Singleton
+namespace Frameworks.Singleton
 {
     /// <summary>
     /// 싱글톤(Singleton) 일반화 클래스

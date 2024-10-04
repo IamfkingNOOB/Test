@@ -1,4 +1,4 @@
-namespace Framework.StatePattern
+namespace Frameworks.StatePattern
 {
 	/// <summary>
 	/// [인터페이스] 상태 패턴을 구현합니다.

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using EntityDatabase;
-using Framework.Singleton;
+using Frameworks.Singleton;
 
 namespace DataSystem
 {

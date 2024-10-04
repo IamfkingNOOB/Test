@@ -1,4 +1,4 @@
-using Framework.BehaviourTree;
+using Frameworks.BehaviourTree;
 using UnityEngine;
 
 namespace MonsterSystem

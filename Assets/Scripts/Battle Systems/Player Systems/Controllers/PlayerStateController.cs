@@ -1,5 +1,5 @@
 using System;
-using Framework.StatePattern;
+using Frameworks.StatePattern;
 using UnityEngine;
 
 namespace PlayerSystem

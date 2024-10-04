@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Framework.BehaviourTree
+namespace Frameworks.BehaviourTree
 {
 	/*
 	 * Sequence: 자식 노드를 순회하다가,
