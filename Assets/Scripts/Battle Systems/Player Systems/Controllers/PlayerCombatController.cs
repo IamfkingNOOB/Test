@@ -60,7 +60,7 @@ namespace PlayerSystem
 		// [함수] 피해량을 계산합니다.
 		private bool CalculateDamage(MonsterAttacker monster)
 		{
-			statusController.Status.DamageHealthPoint(10); // TODO: monster의 공격력으로 바꿀 것.
+			statusController.Status.DamageHealthPoint(monster.StatusController.Status.ATK);
 			return statusController.Status.CurrentHealthPoint > 0;
 		}
 	}

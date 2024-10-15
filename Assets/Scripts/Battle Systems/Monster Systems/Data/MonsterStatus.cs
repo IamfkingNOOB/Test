@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace MonsterSystem
 {
+	/// <summary>
+	/// [클래스] 몬스터의 스탯(데이터)을 표현합니다.
+	/// </summary>
 	internal class MonsterStatus : INotifyPropertyChanged
 	{
 		#region 변수(필드)
@@ -16,6 +19,13 @@ namespace MonsterSystem
 			private set => SetField(ref _currentHealthPoint, value, nameof(CurrentHealthPoint));
 		}
 		internal int MaxHealthPoint { get; init; } // 최대 체력
+
+		private int _atk;
+		internal int ATK
+		{
+			get => _atk;
+			private set => SetField(ref _atk, value, nameof(ATK));
+		}
 		
 		// [변수] 공격 범위
 		internal float AttackRange { get; init; }
@@ -50,6 +60,12 @@ namespace MonsterSystem
 		}
 		
 		#endregion 프로퍼티 변경 이벤트
+		
+		// [함수] 모든 데이터를 원복합니다.
+		internal void Reset()
+		{
+			_currentHealthPoint = MaxHealthPoint; // 현재 체력을 최대 체력으로 전부 회복합니다.
+		}
 		
 		// [함수] 체력을 회복합니다. 최대 체력을 초과하여 회복할 수 없습니다.
 		internal void HealHealthPoint(int heal) => CurrentHealthPoint = Mathf.Min(CurrentHealthPoint + heal, MaxHealthPoint);

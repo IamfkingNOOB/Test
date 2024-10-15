@@ -40,6 +40,8 @@ namespace MonsterSystem
 		// [인터페이스 함수] 노드를 평가합니다.
 		NodeState INode.Evaluate()
 		{
+			Debug.Log("MonsterWanderNode가 호출되었습니다.");
+			
 			if (Time.time - _elapsedTime > WanderInterval) // 일정 주기마다,
 			{
 				Wander(_navMeshAgent, _monster); // 주위를 순찰하고,

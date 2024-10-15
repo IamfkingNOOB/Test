@@ -10,6 +10,7 @@ namespace PlayerSystem
 		// [변수] 필요한 컨트롤러를 참조합니다.
 		[SerializeField] private PlayerStateController stateController;
 		[SerializeField] private PlayerInputController inputController;
+		[SerializeField] private PlayerAttacker attacker;
 
 		// [함수] Idle 애니메이션의 시작에 호출하여, Idle 상태에 진입합니다.
 		private void OnStartIdleState()
@@ -34,6 +35,12 @@ namespace PlayerSystem
 		private void OnEndPreInputTime()
 		{
 			inputController.SetPreInputTime(false); // 애니메이션의 특정 시점에 호출하여, 이후로 저장된 입력을 호출하거나, 입력을 즉시 처리합니다.
+		}
+
+		// [함수] 공격 애니메이션에서, 각 애니메이션에 대해 피해량의 배율을 설정합니다.
+		private void OnSetDamageMagnification(int percentage)
+		{
+			attacker.DamageMagnification = percentage; // 공격 충돌체에 배율 값을 전달합니다.
 		}
 	}
 }

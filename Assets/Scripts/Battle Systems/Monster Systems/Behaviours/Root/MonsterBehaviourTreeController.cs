@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BattleSystem;
 using Frameworks.BehaviourTree;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,14 +16,12 @@ namespace MonsterSystem
 		#region 생성자 용도의 매개변수
 		
 		// [변수] 각 노드에 필요한 컨트롤러 및 컴포넌트
+		[SerializeField] private MonsterStatusController statusController;
 		[SerializeField] private MonsterObjectPoolController objectPoolController;
 		[SerializeField] private MonsterCombatController combatController;
 
 		[SerializeField] private Animator animator;
 		[SerializeField] private NavMeshAgent navMeshAgent;
-		
-		private MonsterStatus _status; // [변수] 몬스터의 스탯 데이터
-		private Transform _target; // 목표의 위치; TODO: 목표를 이벤트로 갱신하도록 구현할 것.
 		
 		#endregion 생성자 용도의 매개변수
 
@@ -73,7 +72,7 @@ namespace MonsterSystem
 				{
 					new SequenceNode(new List<INode>
 					{
-						new MonsterIsDeadNode(_status),
+						new MonsterIsDeadNode(statusController.Status),
 						new MonsterDieNode(this, objectPoolController, animator, navMeshAgent)
 					}),
 					
@@ -88,15 +87,15 @@ namespace MonsterSystem
 				{
 					new SequenceNode(new List<INode>
 					{
-						new MonsterIsNearToAttackNode(transform, _target, _status.AttackRange),
-						new MonsterIsForwardToAttackNode(transform, _target, animator, navMeshAgent),
+						new MonsterIsNearToAttackNode(transform, combatController.Target, statusController.Status.AttackRange),
+						new MonsterIsForwardToAttackNode(transform, combatController.Target, animator, navMeshAgent),
 						new MonsterAttackNode(animator)
 					}),
 					
 					new SequenceNode(new List<INode>
 					{
-						new MonsterIsNearToChaseNode(transform, _target, _status.ChaseRange),
-						new MonsterChaseNode(_target, animator, navMeshAgent)
+						new MonsterIsNearToChaseNode(transform, combatController.Target, statusController.Status.ChaseRange),
+						new MonsterChaseNode(combatController.Target, animator, navMeshAgent)
 					}),
 					
 					new MonsterWanderNode(transform, navMeshAgent, animator)
@@ -105,7 +104,7 @@ namespace MonsterSystem
 			
 			return newTree;
 		}
-		
+
 		#endregion 함수(메서드)
 	}
 }

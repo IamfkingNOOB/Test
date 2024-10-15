@@ -9,8 +9,17 @@ namespace MonsterSystem
 	/// </summary>
 	internal class MonsterObjectPoolController : MonoBehaviour, IObjectPoolItem<MonsterObjectPoolController>
 	{
+		// [변수] 몬스터의 스탯(데이터)
+		[SerializeField] private MonsterStatusController statusController;
+		
 		// [변수] 오브젝트 풀의 참조
 		private IObjectPool<MonsterObjectPoolController> _pool;
+
+		// [유니티 생명 주기 함수] OnEnable()
+		private void OnEnable()
+		{
+			statusController.Status.Reset(); // 스탯을 초기화합니다.
+		}
 		
 		// [인터페이스 함수] 오브젝트 풀의 참조를 저장합니다. 오브젝트 풀링 매니저에서 호출합니다.
 		void IObjectPoolItem<MonsterObjectPoolController>.GetPool(IObjectPool<MonsterObjectPoolController> pool)

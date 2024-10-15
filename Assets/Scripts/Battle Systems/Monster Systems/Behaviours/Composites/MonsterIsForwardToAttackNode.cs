@@ -29,6 +29,8 @@ namespace MonsterSystem
 		// [인터페이스 함수] 노드를 평가합니다.
 		NodeState INode.Evaluate()
 		{
+			Debug.Log("MonsterIsForwardToAttackNode가 호출되었습니다.");
+			
 			NodeState nodeState = IsPlayingAttackAnimation(_animator) // 지금 공격 애니메이션을 재생 중이라면,
 				? NodeState.Running // 노드의 상태를 Running으로 반환합니다. (노드의 평가를 종료시킨다.)
 				: TurnToTarget(_monster, _target, _navMeshAgent); // 아니라면, 몬스터가 목표를 바라보고 있는지를 판별하여, 그에 맞는 노드의 상태를 반환합니다.

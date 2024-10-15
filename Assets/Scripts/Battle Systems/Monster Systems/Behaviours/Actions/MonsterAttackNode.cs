@@ -22,6 +22,8 @@ namespace MonsterSystem
 		// [인터페이스 함수] 노드를 평가합니다.
 		NodeState INode.Evaluate()
 		{
+			Debug.Log("MonsterAttackNode가 호출되었습니다.");
+			
 			PlayAnimation(_animator); // 애니메이션을 재생합니다.
 
 			return NodeState.Success; // 항상 성공 상태를 반환합니다.

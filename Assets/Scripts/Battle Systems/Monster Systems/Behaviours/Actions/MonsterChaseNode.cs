@@ -28,6 +28,8 @@ namespace MonsterSystem
 		// [인터페이스 함수] 노드를 평가합니다.
 		NodeState INode.Evaluate()
 		{
+			Debug.Log("MonsterChaseNode가 호출되었습니다.");
+			
 			StartNavMesh(_navMeshAgent, _target.position); // NavMesh를 시작하고,
 			PlayAnimation(_animator); // 애니메이션을 재생합니다.
 		

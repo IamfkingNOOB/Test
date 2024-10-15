@@ -33,6 +33,8 @@ namespace MonsterSystem
 		// [인터페이스 함수] 노드를 평가합니다.
 		NodeState INode.Evaluate()
 		{
+			Debug.Log("MonsterDieNode가 호출되었습니다.");
+			
 			StopEvaluation(_behaviourTree); // 행동 트리의 평가를 중단하고,
 			StopNavMesh(_navMeshAgent); // NavMesh를 비활성화하고,
 			PlayAnimation(_animator, _dieAnimatorHash); // 애니메이션을 재생하고,

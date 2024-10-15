@@ -3,26 +3,17 @@ using UnityEngine;
 namespace MonsterSystem
 {
 	/// <summary>
-	/// [클래스] 몬스터의 스탯을 관리합니다.
+	/// [클래스] 몬스터의 스탯(데이터)을 관리합니다.
 	/// </summary>
 	internal class MonsterStatusController : MonoBehaviour
 	{
 		// [변수] 몬스터의 스탯 데이터
-		private MonsterStatus _status;
+		internal MonsterStatus Status { get; private set; } = new();
 
-		internal bool IsDead()
+		// [함수] 스탯 데이터를 초기화합니다.
+		internal void InitStatus(MonsterStatus status)
 		{
-			return _status.CurrentHealthPoint <= 0;
-		}
-
-		internal float GetAttackRange()
-		{
-			return _status.AttackRange;
-		}
-
-		internal void GetDamage(int damage)
-		{
-			_status.DamageHealthPoint(damage);
+			Status = status;
 		}
 	}
 }

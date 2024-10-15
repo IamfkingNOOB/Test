@@ -24,6 +24,8 @@ namespace MonsterSystem
 		// [인터페이스 함수] 노드를 평가합니다.
 		NodeState INode.Evaluate()
 		{
+			Debug.Log("MonsterIsNearToChaseNode가 호출되었습니다.");
+			
 			float distance = CalculateDistance(_monster.position, _target.position); // 몬스터와 목표 사이의 거리를 계산하고,
 			NodeState nodeState = IsTargetInChaseRange(distance, _chaseRange); // 그 값이 추적 범위 안에 있는가를 판별합니다.
 
