@@ -19,7 +19,7 @@ namespace MonsterSystem
 		}
 
 		// [함수] 이 게임 오브젝트를 오브젝트 풀에 돌려 놓습니다. (비활성화)
-		public void Release()
+		internal void Release()
 		{
 			_pool.Release(this);
 		}

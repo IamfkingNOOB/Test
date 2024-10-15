@@ -14,28 +14,20 @@ namespace MonsterSystem
 		private readonly MonsterBehaviourTreeController _behaviourTree; // 행동 트리
 		private readonly MonsterObjectPoolController _objectPool; // 오브젝트 풀링
 	
-		// [변수] 애니메이터 및 매개변수
-		private readonly Animator _animator;
-		private readonly int _dieAnimatorHash = Animator.StringToHash("Die");
-	
 		// [변수] NavMesh 컴포넌트
 		private readonly NavMeshAgent _navMeshAgent;
 	
+		// [변수] 애니메이터 및 매개변수
+		private readonly Animator _animator;
+		private readonly int _dieAnimatorHash = Animator.StringToHash("Die"); // Bool
+
 		// [생성자] 변수를 초기화합니다.
-		internal MonsterDieNode(MonsterBehaviourTreeController behaviourTree, MonsterObjectPoolController objectPool)
+		internal MonsterDieNode(MonsterBehaviourTreeController behaviourTree, MonsterObjectPoolController objectPool, Animator animator, NavMeshAgent navMeshAgent)
 		{
 			_behaviourTree = behaviourTree;
 			_objectPool = objectPool;
-		
-			if (!_behaviourTree.TryGetComponent(out _animator))
-			{
-				Debug.LogError("[MonsterDieNode] Animator 컴포넌트를 찾을 수 없습니다.");
-			}
-
-			if (!_behaviourTree.TryGetComponent(out _navMeshAgent))
-			{
-				Debug.LogError("[MonsterDieNode] NavMeshAgent 컴포넌트를 찾을 수 없습니다.");
-			}
+			_animator = animator;
+			_navMeshAgent = navMeshAgent;
 		}
 	
 		// [인터페이스 함수] 노드를 평가합니다.

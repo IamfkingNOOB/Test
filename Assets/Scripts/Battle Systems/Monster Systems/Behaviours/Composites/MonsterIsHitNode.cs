@@ -7,7 +7,7 @@ namespace MonsterSystem
 	/// </summary>
 	internal class MonsterIsHitNode : INode
 	{
-		// [변수] 몬스터의 컨트롤러
+		// [변수] 전투 컨트롤러
 		private readonly MonsterCombatController _combat;
 	
 		// [생성자] 변수를 초기화합니다.
@@ -19,8 +19,9 @@ namespace MonsterSystem
 		// [인터페이스 함수] 노드를 평가합니다.
 		NodeState INode.Evaluate()
 		{
-			// 피격 판별 변수를 참조하여 피격 여부를 판단합니다.
-			NodeState nodeState = (_combat.IsHit) ? NodeState.Success : NodeState.Failure;
+			NodeState nodeState = (_combat.IsHit) ? NodeState.Success : NodeState.Failure; // 피격 판별 변수를 참조하여 피격 여부를 판단합니다.
+			_combat.ResetHitData(); // 판단 이후, 피격 판별 변수를 초기화합니다.
+			
 			return nodeState;
 		}
 	}

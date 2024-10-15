@@ -8,36 +8,28 @@ namespace MonsterSystem
 	/// </summary>
 	internal class MonsterHitNode : INode
 	{
-		// [변수] 몬스터의 컨트롤러
-		private readonly MonsterCombatController _combat;
-	
 		// [변수] 애니메이터 및 매개변수
 		private readonly Animator _animator;
 		private readonly int _hitAnimatorHash = Animator.StringToHash("Hit");
 	
 		// [생성자] 변수를 초기화합니다.
-		internal MonsterHitNode(MonsterCombatController combat)
+		internal MonsterHitNode(Animator animator)
 		{
-			_combat = combat;
-		
-			if (!_combat.TryGetComponent(out _animator))
-			{
-				Debug.LogError("[MonsterHitNode] Animator 컴포넌트를 찾을 수 없습니다.");
-			}
+			_animator = animator;
 		}
 	
 		// [인터페이스 함수] 노드를 평가합니다.
 		NodeState INode.Evaluate()
 		{
-			PlayAnimation(_animator, _hitAnimatorHash,  _combat); // 애니메이션을 재생하고,
+			PlayAnimation(_animator, _hitAnimatorHash); // 애니메이션을 재생합니다.
+			
 			return NodeState.Success; // 항상 성공 상태를 반환합니다.
 		}
 	
 		// [함수] 애니메이션을 재생합니다.
-		private void PlayAnimation(Animator animator, int animatorHash, MonsterCombatController controller)
+		private void PlayAnimation(Animator animator, int animatorHash)
 		{
-			animator.SetTrigger(animatorHash); // 애니메이션을 재생하고,
-			controller.ResetHitData(); // 피격 변수를 초기화합니다.
+			animator.SetTrigger(animatorHash); // 애니메이션을 재생합니다.
 		}
 	}
 }

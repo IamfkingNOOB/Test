@@ -7,13 +7,13 @@ namespace MonsterSystem
 	/// <summary>
 	/// [클래스] 몬스터의 순찰을 정의하는 노드입니다.
 	/// </summary>
-	public class MonsterWanderNode : INode
+	internal class MonsterWanderNode : INode
 	{
 		#region 변수(필드)
 
-		// [변수] NavMeshAgent 및 몬스터의 위치
+		// [변수] 몬스터의 위치 및 NavMeshAgent
+		private readonly Transform _monster;
 		private readonly NavMeshAgent _navMeshAgent;
-		private readonly Transform _monsterTransform;
 
 		// [변수] 애니메이터 및 매개변수
 		private readonly Animator _animator;
@@ -28,10 +28,10 @@ namespace MonsterSystem
 		#region 함수(메서드)
 		
 		// [생성자] 변수를 초기화합니다.
-		public MonsterWanderNode(NavMeshAgent navMeshAgent, Transform monsterTransform, Animator animator)
+		internal MonsterWanderNode(Transform monster, NavMeshAgent navMeshAgent, Animator animator)
 		{
+			_monster = monster;
 			_navMeshAgent = navMeshAgent;
-			_monsterTransform = monsterTransform;
 			_animator = animator;
 
 			_elapsedTime = Time.time;
@@ -42,7 +42,7 @@ namespace MonsterSystem
 		{
 			if (Time.time - _elapsedTime > WanderInterval) // 일정 주기마다,
 			{
-				Wander(_navMeshAgent, _monsterTransform); // 주위를 순찰하고,
+				Wander(_navMeshAgent, _monster); // 주위를 순찰하고,
 				_elapsedTime = Time.time; // 경과 시간을 갱신합니다.
 			}
 

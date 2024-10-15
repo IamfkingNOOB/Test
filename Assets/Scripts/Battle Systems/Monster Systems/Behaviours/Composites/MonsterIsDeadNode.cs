@@ -7,11 +7,11 @@ namespace MonsterSystem
 	/// </summary>
 	internal class MonsterIsDeadNode : INode
 	{
-		// [변수] 스탯 컨트롤러
-		private readonly MonsterStatusController _status;
+		// [변수] 스탯 데이터
+		private readonly MonsterStatus _status;
 	
 		// [생성자] 변수를 초기화합니다.
-		internal MonsterIsDeadNode(MonsterStatusController status)
+		internal MonsterIsDeadNode(MonsterStatus status)
 		{
 			_status = status;
 		}
@@ -20,7 +20,7 @@ namespace MonsterSystem
 		NodeState INode.Evaluate()
 		{
 			// 몬스터의 현재 체력이 0 이하일 경우, 사망한 것으로 판단합니다.
-			NodeState nodeState = (_status.IsDead()) ? NodeState.Success : NodeState.Failure;
+			NodeState nodeState = (_status.CurrentHealthPoint <= 0) ? NodeState.Success : NodeState.Failure;
 			return nodeState;
 		}
 	}

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Frameworks.BehaviourTree;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace MonsterSystem
 {
@@ -11,16 +12,25 @@ namespace MonsterSystem
 	{
 		#region 변수(필드)
 
-		// [변수] 각 노드에 필요한 컨트롤러 데이터
-		[SerializeField] private MonsterStatusController statusController;
+		#region 생성자 용도의 매개변수
+		
+		// [변수] 각 노드에 필요한 컨트롤러 및 컴포넌트
 		[SerializeField] private MonsterObjectPoolController objectPoolController;
 		[SerializeField] private MonsterCombatController combatController;
+
+		[SerializeField] private Animator animator;
+		[SerializeField] private NavMeshAgent navMeshAgent;
 		
+		private MonsterStatus _status; // [변수] 몬스터의 스탯 데이터
+		private Transform _target; // 목표의 위치; TODO: 목표를 이벤트로 갱신하도록 구현할 것.
+		
+		#endregion 생성자 용도의 매개변수
+
 		// [변수] 몬스터의 행동 트리에 사용할 최상위 노드
 		private INode _rootNode;
 		
         // [변수] 행동 트리의 평가 진행 여부
-		public bool IsStopped { get; set; }
+		internal bool IsStopped { get; set; }
 
 		#endregion 변수(필드)
 		
@@ -63,12 +73,14 @@ namespace MonsterSystem
 				{
 					new SequenceNode(new List<INode>
 					{
-						new MonsterIsDeadNode(statusController), new MonsterDieNode(this, objectPoolController)
+						new MonsterIsDeadNode(_status),
+						new MonsterDieNode(this, objectPoolController, animator, navMeshAgent)
 					}),
 					
 					new SequenceNode(new List<INode>
 					{
-						new MonsterIsHitNode(combatController), new MonsterHitNode(combatController)
+						new MonsterIsHitNode(combatController),
+						new MonsterHitNode(animator)
 					})
 				}),
 				
@@ -76,20 +88,19 @@ namespace MonsterSystem
 				{
 					new SequenceNode(new List<INode>
 					{
-						new MonsterIsNearToAttackNode(combatController, statusController), new MonsterIsForwardToAttackNode(combatController), //new MonsterAttackNode()
+						new MonsterIsNearToAttackNode(transform, _target, _status.AttackRange),
+						new MonsterIsForwardToAttackNode(transform, _target, animator, navMeshAgent),
+						new MonsterAttackNode(animator)
 					}),
 					
 					new SequenceNode(new List<INode>
 					{
-						//new MonsterIsNearToChase(), new MonsterChaseNode()
+						new MonsterIsNearToChase(transform, _target, _status.ChaseRange),
+						new MonsterChaseNode(_target, animator, navMeshAgent)
 					}),
 					
-					//new MonsterWanderNode()
+					new MonsterWanderNode(transform, navMeshAgent, animator)
 				})
-				
-				
-				
-				
 			});
 			
 			return newTree;
