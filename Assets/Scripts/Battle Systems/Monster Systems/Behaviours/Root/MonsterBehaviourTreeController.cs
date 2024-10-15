@@ -95,7 +95,7 @@ namespace MonsterSystem
 					
 					new SequenceNode(new List<INode>
 					{
-						new MonsterIsNearToChase(transform, _target, _status.ChaseRange),
+						new MonsterIsNearToChaseNode(transform, _target, _status.ChaseRange),
 						new MonsterChaseNode(_target, animator, navMeshAgent)
 					}),
 					
