@@ -1,3 +1,4 @@
+using BattleSystem;
 using UnityEngine;
 
 namespace PlayerSystem
@@ -14,6 +15,13 @@ namespace PlayerSystem
 		internal void InitStatus(PlayerStatus status)
 		{
 			Status = status;
+		}
+		
+		
+		// Test
+		private void Awake()
+		{
+			BattleManager.Instance.SetPlayer(this.transform);
 		}
 	}
 }

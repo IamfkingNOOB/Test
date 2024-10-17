@@ -1307,6 +1307,8 @@ GameObject:
   - component: {fileID: 426801103}
   - component: {fileID: 426801102}
   - component: {fileID: 426801101}
+  - component: {fileID: 426801105}
+  - component: {fileID: 426801104}
   m_Layer: 0
   m_Name: '[Canvas] Monster Status'
   m_TagString: Untagged
@@ -1398,6 +1400,33 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &426801104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426801099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d4424c6a83e020428ce0ab70a66f18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 426801105}
+  nameText: {fileID: 0}
+  healthPointBar: {fileID: 0}
+--- !u!225 &426801105
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426801099}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &437072619
 GameObject:
   m_ObjectHideFlags: 0
@@ -2692,6 +2721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 771887600}
   - component: {fileID: 771887601}
+  - component: {fileID: 771887602}
   m_Layer: 0
   m_Name: '[Script] Test'
   m_TagString: Untagged
@@ -2726,6 +2756,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f74aeffe5527e644927ab138c451edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &771887602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771887598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5081c01858c4344d80c468fe6267fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monster: {fileID: 11400000, guid: df9d4984e629d5c41bada0fbe58d144b, type: 2}
 --- !u!1 &778537525
 GameObject:
   m_ObjectHideFlags: 0
@@ -3679,10 +3722,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b841be0d24d06349952ab259daca183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolPrefab: {fileID: 3648530235480787288, guid: 266190050eaa1b44c858c35cea07d9c7, type: 3}
+  poolPrefab:
+  - {fileID: 3648530235480787288, guid: 266190050eaa1b44c858c35cea07d9c7, type: 3}
   collectionCheck: 0
   defaultCapacity: 10
   maxSize: 100
+  stageManager: {fileID: 0}
   spawnRadius: 20
 --- !u!4 &1073906059
 Transform:
@@ -6652,6 +6697,10 @@ PrefabInstance:
     - target: {fileID: 3657972506123353782, guid: 266190050eaa1b44c858c35cea07d9c7, type: 3}
       propertyPath: m_Name
       value: '[Transform] Monster'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3657972506123353782, guid: 266190050eaa1b44c858c35cea07d9c7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8344269340382288075, guid: 266190050eaa1b44c858c35cea07d9c7, type: 3}
       propertyPath: m_LocalPosition.x

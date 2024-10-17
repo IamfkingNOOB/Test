@@ -23,7 +23,7 @@ namespace MonsterSystem
 			Debug.Log("MonsterIsDeadNode가 호출되었습니다.");
 			
 			// 몬스터의 현재 체력이 0 이하일 경우, 사망한 것으로 판단합니다.
-			NodeState nodeState = (_status.CurrentHealthPoint <= -1) ? NodeState.Success : NodeState.Failure;
+			NodeState nodeState = (_status.CurrentHP <= 0) ? NodeState.Success : NodeState.Failure;
 			return nodeState;
 		}
 	}

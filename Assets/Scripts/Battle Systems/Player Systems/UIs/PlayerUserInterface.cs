@@ -60,8 +60,11 @@ namespace PlayerSystem
 		// [함수] 프로퍼티가 변경되지 않았지만 UI를 갱신해야 할 필요가 있을 때, 강제로 모든 UI 요소를 갱신합니다.
 		private void UpdateUI()
 		{
+			healthPointBar.maxValue = _playerData.MaxHealthPoint;
 			healthPointBar.value = _playerData.CurrentHealthPoint;
 			healthPointText.SetText($"{_playerData.CurrentHealthPoint} / {_playerData.MaxHealthPoint}");
+
+			skillPointBar.maxValue = _playerData.MaxSkillPoint;
 			skillPointBar.value = _playerData.CurrentSkillPoint;
 			skillPointText.SetText($"{_playerData.CurrentSkillPoint} / {_playerData.MaxSkillPoint}");
 		}

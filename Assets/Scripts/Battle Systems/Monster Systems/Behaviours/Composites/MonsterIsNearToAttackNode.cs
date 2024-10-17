@@ -18,13 +18,13 @@ namespace MonsterSystem
 		{
 			_monster = monster;
 			_target = target;
-			_attackRange = attackRange;
+			_attackRange = 5;
 		}
 
 		// [인터페이스 함수] 노드를 평가합니다.
 		NodeState INode.Evaluate()
 		{
-			Debug.Log("MonsterIsNearToAttackNode가 호출되었습니다.");
+			Debug.Log($"MonsterIsNearToAttackNode가 호출되었습니다. Monster = {_monster}, Target = {_target}");
 			
 			float distance = CalculateDistance(_monster.position, _target.position); // 몬스터와 목표 사이의 거리를 계산하고,
 			NodeState nodeState = IsTargetInAttackRange(distance, _attackRange); // 그 값이 공격 범위 안에 있는가를 판별합니다.

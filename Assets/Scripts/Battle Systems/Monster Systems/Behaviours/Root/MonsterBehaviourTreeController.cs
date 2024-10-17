@@ -47,7 +47,10 @@ namespace MonsterSystem
 		{
 			if (!IsStopped) // 평가가 중단되지 않았다면,
 			{
-				_rootNode.Evaluate(); // 매 프레임마다 행동 트리를 평가합니다.
+				if (_rootNode.Evaluate() == NodeState.Stop) // 매 프레임마다 행동 트리를 평가합니다.
+				{
+					IsStopped = true;
+				}
 			}
 		}
 

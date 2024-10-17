@@ -18,7 +18,7 @@ namespace MonsterSystem
 		{
 			_monster = monster;
 			_target = target;
-			_chaseRange = chaseRange;
+			_chaseRange = 10;
 		}
 
 		// [인터페이스 함수] 노드를 평가합니다.

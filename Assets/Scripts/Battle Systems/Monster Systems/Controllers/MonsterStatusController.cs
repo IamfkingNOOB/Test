@@ -8,12 +8,7 @@ namespace MonsterSystem
 	internal class MonsterStatusController : MonoBehaviour
 	{
 		// [변수] 몬스터의 스탯 데이터
-		internal MonsterStatus Status { get; private set; } = new();
-
-		// [함수] 스탯 데이터를 초기화합니다.
-		internal void InitStatus(MonsterStatus status)
-		{
-			Status = status;
-		}
+		[SerializeField] private MonsterStatus status;
+		internal MonsterStatus Status => status;
 	}
 }

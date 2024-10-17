@@ -12,15 +12,13 @@ namespace MonsterSystem
 		// [변수] 스탯 컨트롤러
 		[SerializeField] private MonsterStatusController statusController;
 
-		internal Transform Target { get; private set; } // [변수] 추적할 목표 대상
+		internal Transform Target { get; private set; } = BattleManager.Instance.CurrentPlayer; // [변수] 추적할 목표 대상
 		internal bool IsHit { get; private set; } // [변수] 피격 여부 정보
 
 		// [유니티 생명 주기 함수 함수] Awake()
 		private void Awake()
 		{
 			ResetHitData(); // 피격 여부를 초기화합니다.
-
-			Target = FindAnyObjectByType<PlayerStatusController>().transform;
 		}
 
 		// [유니티 생명 주기 함수] OnEnable()
@@ -44,7 +42,7 @@ namespace MonsterSystem
 				IsHit = true; // 피격 상태가 되고,
 
 				int damage = CalculateDamage(statusController.Status, player.StatusController.Status); // 피해량을 계산하여,
-				statusController.Status.DamageHealthPoint(damage); // 스탯에 적용합니다.
+				statusController.Status.DamageHP(damage); // 스탯에 적용합니다.
 			}
 		}
 

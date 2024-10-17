@@ -45,6 +45,10 @@ namespace Frameworks.BehaviourTree
 					// Success일 경우, Success를 반환합니다.
 					case NodeState.Success:
 						return NodeState.Success;
+					
+					// Stop일 경우, Stop을 반환합니다.
+					case NodeState.Stop:
+						return NodeState.Stop;
 
 					// Failure일 경우, 다음 노드를 평가합니다.
 					default:

@@ -40,6 +40,7 @@ namespace MonsterSystem
 		private void StartNavMesh(NavMeshAgent navMeshAgent, Vector3 target)
 		{
 			navMeshAgent.isStopped = false;
+			navMeshAgent.updatePosition = true;
 			navMeshAgent.SetDestination(target);
 		}
 	

@@ -1,4 +1,5 @@
 using Frameworks.ObjectPool;
+using StageSystem;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +10,9 @@ namespace MonsterSystem
 	/// </summary>
 	internal class MonsterSpawner : ObjectPoolManager<MonsterObjectPoolController>
 	{
+		// [변수] 무대 관리자
+		[SerializeField] private StageManager stageManager;
+		
 		// [변수] 몬스터를 생성할 위치의 범위 (이 컴포넌트가 부착된 오브젝트의 위치를 기준으로 합니다.)
 		[SerializeField] private float spawnRadius;
 
