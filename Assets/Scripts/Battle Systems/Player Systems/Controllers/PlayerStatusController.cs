@@ -16,12 +16,5 @@ namespace PlayerSystem
 		{
 			Status = status;
 		}
-		
-		
-		// Test
-		private void Awake()
-		{
-			BattleManager.Instance.SetPlayer(this.transform);
-		}
 	}
 }

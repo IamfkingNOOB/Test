@@ -1,4 +1,3 @@
-using BattleSystem;
 using UnityEngine;
 
 namespace PlayerSystem
@@ -69,6 +68,7 @@ namespace PlayerSystem
 
 		protected override void Attack()
 		{
+			SetTarget(_controller);
 			PlayAnimation();
 		}
 
@@ -123,7 +123,7 @@ namespace PlayerSystem
 			// 목표가 있을 경우,
 			if (trueTarget)
 			{
-				BattleManager.Instance.TargetMonster(trueTarget);
+				//BattleManager.Instance.TargetMonster(trueTarget);
 			}
 		}
 

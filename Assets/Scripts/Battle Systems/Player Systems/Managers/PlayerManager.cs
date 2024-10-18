@@ -3,32 +3,47 @@ using UnityEngine;
 
 namespace PlayerSystem
 {
-	// [클래스] 플레이어의 전반적인 시스템(교체 등)을 관리합니다.
+	/// <summary>
+	/// [클래스] 플레이어의 전반적인 시스템(교체 등)을 관리합니다.
+	/// </summary>
 	internal class PlayerManager : MonoBehaviour
 	{
-		// [변수] 현재 플레이어 캐릭터
-		internal Transform CurrentPlayer { get; private set; }
+		// [변수] 몬스터의 관리자
+		[SerializeField] private MonsterManager monsterManager;
 		
-		// [이벤트] 플레이어 캐릭터가 교체될 때 호출됩니다.
-		internal event Action<Transform, Transform> PlayerSwapped;
+		
+		
+		// [변수 / 프로퍼티] 현재 조작 중인 플레이어
+		private PlayerStatusController _currentPlayer;
+		internal PlayerStatusController CurrentPlayer
+		{
+			get => _currentPlayer;
+			private set
+			{
+				_currentPlayer = value;
+				PlayerSwapped?.Invoke(_currentPlayer); // 플레이어를 교체할 때 이벤트를 호출합니다.
+			}
+		}
 
-		// [유니티 생명 주기 함수] Awake()
-		private void Awake()
+		// [이벤트] 플레이어를 교체할 때 호출합니다.
+		internal event Action<PlayerStatusController> PlayerSwapped;
+
+		// [함수] 플레이어를 교체합니다.
+		internal void SwapPlayer(PlayerStatusController nextPlayer)
 		{
-			GetLeader(); // 시작하기 전에, CurrentPlayer를 초기화합니다.
+			CurrentPlayer = nextPlayer;
 		}
 		
-		// [함수] 리더를 추가합니다.
-		private void GetLeader()
+		// [함수] 플레이어들을 생성합니다.
+		internal void InstantiatePlayers(PlayerStatusController[] players)
 		{
-			CurrentPlayer = GetComponentInChildren<PlayerStatusController>(includeInactive: false).transform;
-		}
+			foreach (PlayerStatusController player in players)
+			{
+				PlayerStatusController newPlayer = Instantiate(player, transform);
+				// newPlayer.InitStatus();
+			}
 		
-		// [함수] 플레이어 캐릭터를 교체합니다.
-		internal void SwapPlayer(Transform nextPlayer)
-		{
-			PlayerSwapped?.Invoke(CurrentPlayer, nextPlayer); // 관련 이벤트를 호출합니다.
-			CurrentPlayer = nextPlayer; // 플레이어 캐릭터를 교체하고,
+			CurrentPlayer = players[0];
 		}
 	}
 }
