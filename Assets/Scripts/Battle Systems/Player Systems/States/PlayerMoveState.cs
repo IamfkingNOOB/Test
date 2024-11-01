@@ -43,7 +43,7 @@ namespace PlayerSystem
 
 		protected override void Enter()
 		{
-			Debug.Log("Move 상태에 진입합니다!");
+			Debug.Log("[PlayerMoveState] Enter() 함수가 호출되었습니다!");
 		}
 
 		protected override void Execute()

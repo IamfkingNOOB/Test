@@ -35,8 +35,9 @@ namespace PlayerSystem
 		
 		protected override void Enter()
 		{
+			Debug.Log("[PlayerUltimateState] Enter() 함수가 호출되었습니다.");
+			
 			PlayAnimation(); // 애니메이션을 재생합니다.
-			Debug.Log("Ultimate 상태에 진입합니다!");
 		}
 
 		protected override void Execute()

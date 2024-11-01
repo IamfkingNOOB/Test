@@ -30,6 +30,8 @@ namespace PlayerSystem
 		
 		protected override void Enter()
 		{
+			Debug.Log("[PlayerDieState] Enter() 함수가 호출되었습니다.");
+			
 			PlayAnimation(); // 애니메이션을 재생합니다.
 		}
 

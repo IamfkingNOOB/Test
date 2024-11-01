@@ -96,6 +96,12 @@ namespace PlayerSystem
 		{
 			_animator.ResetTrigger(_hitAnimatorHash);
 		}
+
+		// [함수] 피해량을 계산합니다.
+		private void CalculateDamage(MonsterAttacker attacker)
+		{
+			
+		}
 		
 		#endregion 함수(메서드)
 	}

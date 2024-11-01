@@ -19,13 +19,13 @@ namespace PlayerSystem
 		// [유니티 생명 주기 함수] OnDisable()
 		private void OnEnable()
 		{
-			stateController.OnStateChanged += UpdateState; // 이벤트를 구독합니다.
+			stateController.StateChanged += UpdateState; // 이벤트를 구독합니다.
 		}
 
 		// [유니티 생명 주기 함수] OnDisable()
 		private void OnDisable()
 		{
-			stateController.OnStateChanged -= UpdateState; // 이벤트를 해제합니다.
+			stateController.StateChanged -= UpdateState; // 이벤트를 해제합니다.
 		}
 		
 		// [함수] 현재 상태를 갱신하는 이벤트를 정의합니다.

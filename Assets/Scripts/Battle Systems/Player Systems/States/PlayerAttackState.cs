@@ -35,6 +35,8 @@ namespace PlayerSystem
 		
 		protected override void Enter()
 		{
+			Debug.Log("[PlayerAttackState] Enter() 함수가 호출되었습니다!");
+			
 			SetTarget(_controller); // 목표를 설정하고,
 			PlayAnimation(); // 애니메이션을 재생합니다.
 		}

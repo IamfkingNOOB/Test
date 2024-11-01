@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using EntityDatabase;
 using Frameworks.Singleton;
 
 namespace DataSystem
@@ -9,10 +8,50 @@ namespace DataSystem
 	/// </summary>
 	internal class DataManager : Singleton<DataManager>
 	{
-		// [변수] 발키리의 사전
-		private Dictionary<int, ValkyrieDataBase> _valkyrieDictionary;
+		private readonly XMLParser _xmlParser = new XMLParser();
 		
-		// [함수] 발키리의 사전에서 원하는 값을 ID로 접근하여 가져옵니다. 
-		internal ValkyrieDataBase GetValkyrieDataByID(int id) => _valkyrieDictionary.GetValueOrDefault(id, _valkyrieDictionary[0]);
+		// [변수] 발키리의 사전
+		private Dictionary<int, ValkyrieData> _valkyrieDictionary;
+		private Dictionary<int, WeaponData> _weaponDictionary;
+		private Dictionary<int, StigmataData> _stigmataDictionary;
+
+		internal Dictionary<int, ValkyrieData> ValkyrieDictionary
+		{
+			get
+			{
+				if (_valkyrieDictionary == null)
+				{
+					_valkyrieDictionary = _xmlParser.ParseValkyrieData("Valkyrie");
+				}
+				
+				return _valkyrieDictionary;
+			}
+		}
+
+		internal Dictionary<int, WeaponData> WeaponDictionary
+		{
+			get
+			{
+				if (_weaponDictionary == null)
+				{
+					_weaponDictionary = _xmlParser.ParseWeaponData("Weapon");
+				}
+
+				return _weaponDictionary;
+			}
+		}
+
+		internal Dictionary<int, StigmataData> StigmataDictionary
+		{
+			get
+			{
+				if (_stigmataDictionary == null)
+				{
+					_stigmataDictionary = _xmlParser.ParseStigmataData("Stigmata");
+				}
+
+				return _stigmataDictionary;
+			}
+		}
 	}
 }

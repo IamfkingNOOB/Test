@@ -13,15 +13,15 @@ namespace PlayerSystem
 	{
 		#region 변수(필드)
 
-		// [변수] 상태 컨트롤러 및 현재 상태
+		// [변수] 상태 컨트롤러 및 현재 상태(IPlayerInput 인터페이스)
 		[SerializeField] private PlayerStateController stateController;
-		private IPlayerInput _currentState;
+		private IPlayerInput _currentState; // 상태 컨트롤러의 IState 변수와 동기화
 
-		// [변수] 입력 처리를 위한 버퍼 및 대기 시간
+		// [변수] 입력을 처리하기 위한 버퍼 및 대기 시간
 		private Action _inputBuffer;
 		private bool _isPreInputTime;
 
-		// [변수] 이동 입력에 대한 값
+		// [변수] 이동과 관련한 입력의 값
 		private Vector2 _inputVector;
 
 		#endregion 변수(필드)
@@ -31,13 +31,13 @@ namespace PlayerSystem
 		// [유니티 생명 주기 함수] OnEnable()
 		private void OnEnable()
 		{
-			stateController.OnStateChanged += UpdateState; // 이벤트를 구독합니다.
+			stateController.StateChanged += OnUpdateState; // 이벤트를 등록합니다.
 		}
 
 		// [유니티 생명 주기 함수] OnDisable()
 		private void OnDisable()
 		{
-			stateController.OnStateChanged -= UpdateState; // 이벤트를 해제합니다.
+			stateController.StateChanged -= OnUpdateState; // 이벤트를 해제합니다.
 		}
 
 		// [유니티 생명 주기 함수] Update()
@@ -46,8 +46,8 @@ namespace PlayerSystem
 			InvokeInput(); // 입력을 처리합니다.
 		}
 
-		// [함수] 현재 상태를 갱신하는 이벤트를 정의합니다.
-		private void UpdateState(IState changedState)
+		// [콜백 함수] 상태 컨트롤러의 상태 변수의 값이 바뀔 때, 그 값을 동기화합니다.
+		private void OnUpdateState(IState changedState)
 		{
 			_currentState = changedState as IPlayerInput;
 		}
@@ -66,8 +66,11 @@ namespace PlayerSystem
 
 		public void OnMove(InputAction.CallbackContext context)
 		{
-			Vector2 inputVector = context.ReadValue<Vector2>();
-			_inputBuffer = () => _currentState?.Move(inputVector);
+			if (context.performed || context.canceled)
+			{
+				Vector2 inputVector = context.ReadValue<Vector2>();
+				_inputBuffer = () => _currentState?.Move(inputVector);
+			}
 		}
 
 		public void OnEvade(InputAction.CallbackContext context)

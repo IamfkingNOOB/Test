@@ -40,8 +40,9 @@ namespace PlayerSystem
 
 		protected override void Enter()
 		{
+			Debug.Log("[PlayerEvadeState] Enter() 함수가 호출되었습니다.");
+			
 			PlayAnimation(); // 애니메이션을 재생합니다.
-			Debug.Log("Evade 상태에 진입합니다!");
 		}
 
 		protected override void Execute()
@@ -106,8 +107,8 @@ namespace PlayerSystem
 			_evadeCurrentCount = 0;
 		}
 
-		// [함수] 회피 스킬을 발동합니다.
-		public void ActivateEvadeSkill()
+		// [함수] 회피 스킬을 발동합니다. PlayerCombatController에서 호출합니다.
+		internal void ActivateEvadeSkill()
 		{
 			
 		}
