@@ -35,7 +35,7 @@ namespace TitleSystem
 			
 			// Resources 폴더에 접근하여, 식별자에 해당하는 발키리의 모델을 불러옵니다.
 			string resourceName = DataManager.Instance.ValkyrieDictionary.GetValueOrDefault(id).ResourceName;
-			string modelPath = Path.Combine("Valkyries", resourceName, resourceName); // 예: Valkyries/Kiana_C6/Kiana_C6.prefab
+			string modelPath = Path.Combine("Valkyries", "Prefabs", resourceName); // 예: Valkyries/Prefabs/Kiana_C6.prefab
 			GameObject titleModel = Resources.Load<GameObject>(modelPath);
 			
 			// 불러온 모델을 생성합니다.
